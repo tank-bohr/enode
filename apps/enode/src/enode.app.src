@@ -1,0 +1,13 @@
+{application, enode,
+ [
+  {description, "Sends emails"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib,
+                  lager
+                 ]},
+  {mod, { enode_app, []}},
+  {env, []}
+ ]}.
