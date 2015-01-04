@@ -34,7 +34,7 @@ send_email(To, Callback) ->
         {recipient, To}
     ]),
     Body = iolist_to_binary(Body0),
-    lager:debug("body is [~s]", [Body]),
+    lager:debug("body is [~p]", [Body]),
     Options = get_options(To),
     gen_smtp_client:send({?FROM, [To], Body}, Options, Callback).
 
