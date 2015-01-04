@@ -4,10 +4,10 @@
 
 `rebar compile`
 
-# Запуск
+# Запуск бенчмарка
 
-`ERL_LIBS=apps:deps erl -config config/app -s enode`
+`ERL_LIBS=apps:deps erl +K true -config config/app -name bench -s enode_bench`
 
 # Запуск сервера
 
-`ERL_LIBS=apps:deps erl -config config/app -s enode server`
+`ERL_LIBS=apps:deps erl +K true -config config/app -name server -s enode server`

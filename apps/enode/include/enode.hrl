@@ -1,1 +1,0 @@
--define(POOL_NAME, enode_pool).
