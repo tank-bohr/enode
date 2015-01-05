@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  sudo: yes
+  sudo: True
   roles:
     - oh-my-zsh
     - erlang
