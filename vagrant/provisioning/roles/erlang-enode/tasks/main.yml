@@ -20,6 +20,18 @@
     - make
     - htop
 
-- name: build
+- name: Get deps
   sudo: False
-  command: ./rebar get-deps compile chdir=~{{ user }}/erlang-enode
+  command: ./rebar get-deps chdir=~{{ user }}/erlang-enode
+
+- name: Fix eiconv rebar.config
+  sudo: False
+  lineinfile: backup=yes state=absent regexp=require_otp_vsn dest=~{{ user }}/erlang-enode/deps/eiconv/rebar.config
+
+- name: Compile
+  sudo: False
+  command: ./rebar compile chdir=~{{ user }}/erlang-enode
+
+- name: Put private key for dkim
+  sudo: False
+  copy: src=../apps/enode/priv/private-key.pem dest=~{{ user }}/erlang-enode/apps/enode/priv/private-key.pem
