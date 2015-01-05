@@ -6,6 +6,7 @@
     - zsh
 
 - name: oh-my-zsh
+  sudo: False
   git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~{{ user }}/.oh-my-zsh
 
 - name: .zshrc

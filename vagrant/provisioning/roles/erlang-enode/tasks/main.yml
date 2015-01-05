@@ -1,5 +1,19 @@
 - name: git clone
+  sudo: False
   git: repo=https://github.com/tank-bohr/enode.git dest=~{{ user }}/erlang-enode
 
 - name: Set hostname for erlang longnmaes
   hostname: name=erlang-enode-ubuntu.local
+
+- name: Add rabbitmq repo
+  apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main' state=present
+
+- name: Add apt key
+  apt_key: url=http://www.rabbitmq.com/rabbitmq-signing-key-public.asc state=present
+
+- name: Install rabbitmq
+  apt: pkg=rabbitmq-server state=latest update_cache=yes
+
+
+- name: build
+  command: ./rebar get-deps compile chdir=~{{ user }}/erlang-enode
