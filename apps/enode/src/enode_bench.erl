@@ -5,6 +5,8 @@
 ]).
 
 start() ->
+    {ok, _} = enode:start(),
+    ok = enode_sup:start_workers(),
     File = filename:join(code:priv_dir(enode), "emails.csv"),
     {ok, IoDevice} = file:open(File, [read, binary]),
     Timer = timer(),

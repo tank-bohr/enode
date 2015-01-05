@@ -7,7 +7,7 @@
 ]).
 
 -define(FROM, <<"noreply@bohr.su">>).
-% -define(SMTP_SEVER, local).
+%% -define(SMTP_SEVER, local).
 -define(SMTP_SEVER, real).
 
 start() ->
@@ -37,10 +37,12 @@ send_email(To) ->
     T3 = os:timestamp(),
     Result = gen_smtp_client:send_blocking({?FROM, [To], Body}, Options),
     T4 = os:timestamp(),
+    lager:debug("========== Timing for [~p] ==========", [To]),
     lager:debug("Template render: [~p]",  [timer:now_diff(T1, T0)]),
     lager:debug("Convertion: [~p]",       [timer:now_diff(T2, T1)]),
     lager:debug("DNS lookup: [~p]",       [timer:now_diff(T3, T2)]),
     lager:debug("SMTP session: ~.2f sec", [timer:now_diff(T4, T3) / 1000000]),
+    lager:debug("==========================================================================", []),
     Result.
 
 get_options(To) ->
