@@ -18,6 +18,7 @@
   apt: pkg={{ item }} state=latest update_cache=yes
   with_items:
     - make
+    - htop
 
 - name: build
   sudo: False
