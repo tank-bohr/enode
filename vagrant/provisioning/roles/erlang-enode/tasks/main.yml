@@ -16,4 +16,5 @@
 
 
 - name: build
+  sudo: False
   command: ./rebar get-deps compile chdir=~{{ user }}/erlang-enode
