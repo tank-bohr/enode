@@ -32,6 +32,9 @@
   sudo: False
   command: ./rebar compile chdir=~{{ user }}/erlang-enode
 
-- name: Put private key for dkim
+- name: Try to put private key for dkim
   sudo: False
-  copy: src=../apps/enode/priv/private-key.pem dest=~{{ user }}/erlang-enode/apps/enode/priv/private-key.pem
+  ignore_errors: yes
+  copy:
+    src=../../../../../apps/enode/priv/private-key.pem
+    dest=~{{ user }}/erlang-enode/apps/enode/priv/private-key.pem
