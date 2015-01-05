@@ -1,4 +1,5 @@
 *.beam
+*.app
 .rebar
 deps/
 erl_crash.dump

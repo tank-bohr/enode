@@ -18,8 +18,7 @@ loop(IoDevice) ->
         {ok, Data} ->
             To = chomp(Data),
             %% lager:debug("email is: [~p]", [To]),
-            Result = enode:send_email(To),
-            lager:debug("Send email result: [~p]", [Result]),
+            ok = enode_work_queue:enqueue(To),
             loop(IoDevice);
         eof ->
             ok;

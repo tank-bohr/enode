@@ -6,7 +6,8 @@
   {applications, [
                   kernel,
                   stdlib,
-                  lager
+                  lager,
+                  amqp_client
                  ]},
   {mod, { enode_app, []}},
   {env, []}
