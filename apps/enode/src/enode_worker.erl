@@ -49,6 +49,7 @@ code_change(_OldVsn, State, _Extra) ->
     {ok, State}.
 
 work() ->
+    %% lager:debug("Worker [~p] works", [get(worker_id)]),
     case enode_work_queue:poll() of
         {#'basic.get_ok'{delivery_tag = Tag}, Content} ->
             #amqp_msg{payload = Payload} = Content,
@@ -66,4 +67,5 @@ do_work(Payload) ->
     ok.
 
 sleep() ->
+    %% lager:debug("Worker [~p] goes to sleep", [get(worker_id)]),
     timer:send_after(?POLLING_PERIOD, work).
