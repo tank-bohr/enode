@@ -1,0 +1,19 @@
+---
+- name: packages
+  apt: pkg={{ item }} state=latest update_cache=yes
+  with_items:
+    - git
+    - zsh
+
+- name: oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~{{ user }}/.oh-my-zsh
+
+- name: .zshrc
+  template: src=zshrc.j2 dest=~{{ user }}/.zshrc owner={{ user }}
+
+- name: find zsh
+  command: which zsh
+  register: which_zsh
+
+- name: set zsh as default shell
+  user: name={{ user }} shell={{ which_zsh.stdout }}

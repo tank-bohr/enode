@@ -1,0 +1,5 @@
+- name: git clone
+  git: repo=https://github.com/tank-bohr/enode.git dest=~{{ user }}/erlang-enode
+
+- name: Set hostname for erlang longnmaes
+  hostname: name=erlang-enode-ubuntu.local
