@@ -5,4 +5,5 @@ deps/
 erl_crash.dump
 log/
 vagrant/.vagrant
+vagrant/inventory
 apps/enode/priv/private-key.pem
