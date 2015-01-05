@@ -60,8 +60,9 @@ work() ->
     end.
 
 do_work(Payload) ->
+    Result = enode:send_email(Payload),
     WorkerId = get(worker_id),
-    lager:debug("Worker [~p] does hard work: [~p]", [WorkerId, Payload]),
+    lager:notice("Worker [~p] with [~p]: [~p]", [WorkerId, Payload, Result]),
     ok.
 
 sleep() ->
