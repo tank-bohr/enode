@@ -24,7 +24,11 @@ start_link() ->
     supervisor:start_link({local, ?MODULE}, ?MODULE, []).
 
 start_workers() ->
-    lists:foreach(fun(_Index) ->
+    %% Try to be indepotent
+    ok = lists:foreach(fun({_ChildId, ChildPid, _Type, _Modules}) ->
+        ok = supervisor:terminate_child(enode_workers_sup, ChildPid)
+    end, supervisor:which_children(enode_workers_sup)),
+    ok = lists:foreach(fun(_Index) ->
         {ok, _} = supervisor:start_child(enode_workers_sup, [])
     end, lists:seq(1, ?WORKERS_COUNT)).
 
