@@ -8,8 +8,9 @@
 
 -define(APP_NAME, ?MODULE).
 -define(FROM, <<"noreply@tollady.ru">>).
-%% -define(SMTP_SEVER, local).
+-define(DKIM_SELECTOR, <<"default">>).
 -define(SMTP_SEVER, real).
+%% -define(SMTP_SEVER, local).
 
 start() ->
     application:ensure_all_started(?APP_NAME).
@@ -72,8 +73,8 @@ sign_mail_body(MailBody) ->
     File = filename:join(code:priv_dir(?APP_NAME), "private-key.pem"),
     {ok, PrivKey} = file:read_file(File),
     DKIMOptions = [
-        {s, <<"default">>},
-        {d, list_to_binary(email_host(?FROM)) },
+        {s, ?DKIM_SELECTOR},
+        {d, list_to_binary(email_host(?FROM))},
         {private_key, {pem_plain, PrivKey}}
     ],
     mimemail:encode(mimemail:decode(MailBody), [{dkim, DKIMOptions}]).
